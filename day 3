@@ -1,0 +1,16 @@
+## Create an inventory system tracking items and quantities with a dictionary
+
+inventory={'books':1000,'pencil':3000,'pen':1000,'eraser':500,'chart':20}
+
+# display inventory
+inventory.items()
+print(inventory)
+#Adding new item to the inventory
+inventory['marker']= 100
+print(inventory)
+#Modify values
+inventory['chart']=30
+print(inventory)
+#Remove item
+inventory.pop("marker")
+print(inventory)
