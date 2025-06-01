@@ -1,1 +1,8 @@
-
+## Calculate the area of a rectangle using user-input length and width
+try:
+    length=float(input("Enter the lenth:"))
+    breadth=float(input("Enter the breadth:"))
+    Area=length*breadth
+    print("Area of the rectangle is:",Area)
+except ValueError:
+    print("Please enter valid numeric values")
