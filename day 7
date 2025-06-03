@@ -1,0 +1,21 @@
+#Day 7-Count word frequencies in a text file
+import string
+from collections import Counter
+
+#create a sample text file and write some text
+with open("sample.txt","w") as file:
+    file.write("Hello World, thank you for stopping by!")
+
+#Read file content
+with open("sample.txt", "r") as file:
+    text = file.read().lower() #convert text to lower case for easy counting
+
+#Remove punctuation
+text=text.translate(str.maketrans("",  "", string.punctuation))
+
+#split words and count occurences
+word_frequencies=Counter(text.split())
+
+#Display word frquencies
+for word, count in word_frequencies.items():
+    print(f"{word}:{count}")
