@@ -1,0 +1,14 @@
+# Day 5-Write a function that computes the sum and average of a list of numbers
+
+
+def calculation(number):
+    total=sum(number)
+    average=total/len(number)
+    return total, average
+   
+number=[25,85,75,45]
+
+grant_total,average_number=calculation(number)
+
+print("Sum of all numbers:",grant_total)
+print("Average of all numbers:",average_number)
