@@ -1,0 +1,29 @@
+#Day 9-- Extend Car into an ElectricCar subclass with battery capacity
+  #Parent Class
+class Car:
+    def __init__(self, brand, model, year, price):
+        self.brand=brand
+        self.model=model
+        self.year=year
+        self.price=price
+        
+        
+    def display(self):
+        print(f"\nCar Details-\nBrand: {self.brand}\nModel: {self.model}\nYear: {self.year}\nPrice: ${self.price}")
+        
+
+#Child Class
+class ElectricCar(Car):
+    def __init__(self, brand, model, year, price, battery_capacity):
+        super. __init__(brand, model, year, price)
+        self.battery_capacity=battery_capacity
+        
+    def display(self):
+        print(f"This car is an electric {self.brand} {self.model} released in {self.year} with {self.price} having a battery capacity {self.battery_capacity}KWH")
+        
+        
+vehicle = Car("Toyota", "Camry", 2023, 28000)
+evehicle = Car("MG Vindsor","Exclusive Pro", 2024, 1474000)
+
+vehicle.display()
+evehicle.display()
