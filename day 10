@@ -1,0 +1,43 @@
+# Day 10 - Read numbers from a file and handle errors gracefully
+  
+# Create and write numbers to a file
+try:
+    with open("numbers.txt", "w") as file:
+        file.write("48\n89\n95\n62\n")  # Writing numbers as text with newlines
+    print("File 'numbers.txt' created successfully.")
+except IOError as e:
+    print(f"File writing error: {e}")
+
+# Function to read numbers from file with exception handling
+def read_number(filename):
+    try:
+        with open(filename, "r") as file:
+            numbers = []
+            for line in file:
+                try:
+                    number = int(line.strip())  # Convert text to integer
+                    numbers.append(number)
+                except ValueError:
+                    print(f"Warning: '{line.strip()}' is not a valid number. Skipping.")
+
+            return numbers  # Returning the list of numbers
+
+    except FileNotFoundError:
+        print(f"Error: The file '{filename}' does not exist.")
+        return []
+
+    except IOError as e:  # Handles issues like permission errors or disk failures
+        print(f"File reading error: {e}")
+        return []
+
+    except Exception as e:  # Catches any other unexpected errors
+        print(f"Unexpected error: {e}")
+        return []
+
+    finally:
+        print("Execution of file reading completed.")  # Ensures final cleanup or logging
+
+# Call function and display output
+filename = "numb.txt"
+numbers = read_number(filename)
+print("Numbers read from file:", numbers)
