@@ -1,0 +1,34 @@
+#Day 13 - Implement a stack with push, pop, and peek
+
+from collections import deque
+stack = deque()
+
+class Stack:
+    def __init__(self):
+        self.container = deque() #Deque initialisation
+    def push(self,val):
+        self.container.append(val) #Append value
+    def pop(self):
+        return self.container.pop() #Remove and retuen top element
+    def peek(self):
+        return self.container[-1] #Return top element
+    def is_empty(self):
+        return len(self.container)==0  #Checking stack is empty
+    def size(self):
+        return len(self.container)  #Return stack size
+    
+
+#stack instance
+s=Stack()
+
+#Push elements into stack    
+s.push('Excel')
+s.push('Python')
+s.push('SQL')
+s.push('Power BI')
+
+#Display
+print("Top element:",s.peek()) # Should print 'Power BI'
+print("Popped element:", s.pop())  # Should print 'Power BI'
+print("Stack after pop:", list(s.container))  # Convert deque to list for display
+print("Is the stack empty?:",s.is_empty()) #Checking the stack is empty
