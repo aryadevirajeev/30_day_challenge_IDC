@@ -1,0 +1,11 @@
+#Day 14 - Calculate factorial recursively
+def factorial(n):            #Base case: stop recursion when n is 0 or 1
+    if (n==0 or n==1):
+        return 1
+    return n * factorial(n-1)   #Recursive call
+
+
+number=int(input("Enter the number to determine factorial: "))
+result=factorial(number)
+print(f"Factorial of {number} is {result}")  #Output
+
