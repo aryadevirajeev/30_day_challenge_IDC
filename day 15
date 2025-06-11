@@ -1,0 +1,20 @@
+#Day 15 - Create a decorator to log function execution time
+import time
+
+def log_time(func):
+    def wrapper(*args,**kargs):
+        start=time.time()
+        result=func(*args,**kargs)
+        end=time.time()
+        print(func.__name__+" took "+str((end-start)*1000) + " millisec")
+        return result
+    return wrapper
+
+@log_time
+def rectangle_area():
+    length=float(input("Enter the lenth:"))
+    breadth=float(input("Enter the breadth:"))
+    Area=length*breadth
+    print("Area of the rectangle is:",Area,'\n')
+
+rectangle_area()
