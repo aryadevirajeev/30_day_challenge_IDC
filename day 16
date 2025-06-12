@@ -1,0 +1,13 @@
+#Day 16 - Generate the first n Fibonacci numbers with a generator
+def fib():
+    a, b = 0, 1
+    while True:
+      yield a
+      a, b = b, a+b
+        
+number =int(input("Enter the number : "))
+        
+for f in fib():
+    if f > number:
+        break
+    print (f)
