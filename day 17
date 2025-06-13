@@ -1,0 +1,23 @@
+#Day 17 - Build a context manager for safe file handling
+
+class FileManager:
+    def __init__(self, filename, mode):
+        self.filename = filename
+        self.mode = mode
+
+    def __enter__(self):
+        self.file = open(self.filename, self.mode)  # Open file without error handling
+        print(f"Opening '{self.filename}'...")
+        return self.file
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.file.close()  # Close the file unconditionally
+        print(f"File '{self.filename}' closed.")
+
+# Using the context manager
+filename = "example.txt"
+
+with FileManager(filename, "w") as file:
+    file.write("Hello, this is a safe file handling example!")
+
+print("Execution completed.")
