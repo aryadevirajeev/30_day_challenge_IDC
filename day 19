@@ -1,0 +1,49 @@
+#Day 19 - Download multiple files concurrently using threads
+
+#modules
+import os
+import threading
+import requests
+
+def download_file(url, filename, folder="downloads"):
+    """
+    Downloads a single file from the specified URL and saves it with the given filename.
+    """
+    os.makedirs(folder, exist_ok=True)
+    path = os.path.join(folder, filename)
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        with open(path, "wb") as f:
+            f.write(response.content)
+        print(f"[✓] Downloaded: {filename}")
+    except Exception as e:
+        print(f"[✗] Failed to download {filename}: {e}")
+
+def download_files_concurrently(file_list):
+    """
+    Downloads multiple files concurrently using threads.
+    :param file_list: List of tuples (url, filename)
+    """
+    threads = []
+
+    for url, filename in file_list:
+        thread = threading.Thread(target=download_file, args=(url, filename))
+        threads.append(thread)
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+
+    print("\n✅ All downloads completed.")
+
+if __name__ == "__main__":
+    # Add your file URLs and desired filenames here
+    files_to_download = [
+        ("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "file1.pdf"),
+        ("https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-zip-file.zip", "file2.zip"),
+        ("https://www.sample-videos.com/img/Sample-jpg-image-500kb.jpg", "image1.jpg"),
+    ]
+
+    download_files_concurrently(files_to_download)
