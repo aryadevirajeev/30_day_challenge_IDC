@@ -1,0 +1,51 @@
+#Day 18 -  Enforce a naming convention with a metaclass
+
+class NamingConventionMeta(type):
+    def __new__(cls, name, bases, class_dict):
+        for attr_name in class_dict:
+            if callable(class_dict[attr_name]) and not attr_name.startswith('__'):
+                if not attr_name.islower():
+                    raise ValueError(f"Method '{attr_name}' must be lowercase.")
+        print(f"Class '{name}' created successfully with all lowercase method names.")
+        return super().__new__(cls, name, bases, class_dict)
+
+class MyClass(metaclass=NamingConventionMeta):
+    def validmethod(self):
+        print("This is fine.")
+
+
+
+
+  class NamingConventionMeta(type):
+    def __new__(cls, name, bases, class_dict):
+        method_check_log = {}  # Dictionary to store method name and validation result
+
+        for attr_name in class_dict:
+            if callable(class_dict[attr_name]) and not attr_name.startswith('__'):
+                if not attr_name.islower():
+                    method_check_log[attr_name] = "Not lowercase"
+                    raise ValueError(f"Method '{attr_name}' must be lowercase.")
+                else:
+                    method_check_log[attr_name] = "Lowercase"
+
+        print(f"\nNaming Check Log for class '{name}':")
+        for method, status in method_check_log.items():
+            print(f"  - {method}: {status}")
+
+        print(f"\nClass '{name}' created successfully with valid method names.\n")
+        return super().__new__(cls, name, bases, class_dict)
+class MyClass(metaclass=NamingConventionMeta):
+    def validmethod(self):
+        print("This is fine.")
+
+    def anothergoodmethod(self):
+        print("Still fine.")
+
+
+
+
+
+
+    class InvalidClass(metaclass=NamingConventionMeta):
+    def ValidMethod(self):  # Invalid!
+        pass
